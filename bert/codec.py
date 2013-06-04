@@ -84,7 +84,7 @@ class BERTEncoder(object):
             return (Atom("bert"), Atom("false"))
         elif obj is None:
             return (Atom("bert"), Atom("nil"))
-        elif isinstance(obj, unicode):
+        elif isinstance(obj, unicode) and not isinstance(obj, Atom):
             return (Atom("bert"), Atom("string"), Atom(self.encoding.upper()), obj.encode(self.encoding))
         elif isinstance(obj, dict):
             return (Atom("bert"), Atom("dict"), [(self.convert(k), self.convert(v)) for k, v in obj.items()])
